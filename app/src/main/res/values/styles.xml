@@ -6,10 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/cardview_light_background</item>
+        <item name="android:windowBackground">@color/White</item>
     </style>
 
-    <style name="toolBar">
-        <item name="colorControlNormal">#ffffff</item>
-    </style>
 </resources>

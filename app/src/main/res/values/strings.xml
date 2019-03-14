@@ -8,4 +8,5 @@
     <string name="top">top</string>
     <string name="not_important">not important</string>
     <string name="important">important</string>
+    <string name="enter_note">enter note</string>
 </resources>

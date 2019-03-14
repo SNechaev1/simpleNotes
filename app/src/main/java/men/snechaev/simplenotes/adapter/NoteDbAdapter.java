@@ -31,8 +31,7 @@ public class NoteDbAdapter {
     private static final String TABLE_NAME = "tb1_note";
     private static final int DATABASE_VERSION = 1;
 
-
-    private static final String TAG = "NoteBdAdapter";
+    private static final String TAG = "NoteDbAdapter";
     private DataBaseHelper mDataBaseHelper;
     private SQLiteDatabase mDb;
     private final Context mContext;
@@ -98,7 +97,7 @@ public class NoteDbAdapter {
 
     public Cursor fetchAllNotes() {
         Cursor mCursor = mDb.query(TABLE_NAME, new String[]{COL_ID, COL_CONTENT, COL_IMPORTANT,COL_DATETIME},
-                null, null, null, null,"last_motidied_time desc");
+                null, null, null, null,"last_modified_time desc");
         if (mCursor != null) {
             mCursor.moveToFirst();
         }

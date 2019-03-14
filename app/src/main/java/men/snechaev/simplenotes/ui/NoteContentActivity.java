@@ -23,29 +23,25 @@ import men.snechaev.simplenotes.util.DateUtil;
 
 public class NoteContentActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
-    private EditText mEtNoteContent;
+    private EditText mEditNoteContent;
     private ScrollView mScrollView;
     private Note mNote;
     private boolean isImportant = true;
-    private Intent mIntent;
-    private int mNoteID;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_content);
 
-        mEtNoteContent = findViewById(R.id.et_note_content);
+        mEditNoteContent = findViewById(R.id.et_note_content);
 
         mScrollView = findViewById(R.id.scrollview_note_content);
-        mIntent = this.getIntent();
+        Intent intent = this.getIntent();
 
-        if ((mNote = (Note) mIntent.getSerializableExtra("note")) != null) {
-            mNoteID = mNote.getId();
-            mEtNoteContent.setText(mNote.getContent());
-            mEtNoteContent.setSelection(mEtNoteContent.getText().length());
+        if ((mNote = (Note) intent.getSerializableExtra("note")) != null) {
+//            mNoteID = mNote.getId();
+            mEditNoteContent.setText(mNote.getContent());
+            mEditNoteContent.setSelection(mEditNoteContent.getText().length());
             isImportant = mNote.getImportant() == 1;
             Log.d("NoteContentActivity", mNote.getContent() + isImportant);
         }
@@ -61,10 +57,10 @@ public class NoteContentActivity extends AppCompatActivity {
 
 
     private void initToolbar(boolean isImportant) {
-        mToolbar = findViewById(R.id.toolbar_note_content);
-        setSupportActionBar(mToolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_note_content);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -96,19 +92,19 @@ public class NoteContentActivity extends AppCompatActivity {
                 break;
             case R.id.action_save:
                 if (mNote != null) {
-                    String content = mEtNoteContent.getText().toString();
+                    String content = mEditNoteContent.getText().toString();
                     Note editNote = new Note(mNote.getId(), content, isImportant ? 1 : 0,DateUtil.formatDateTime());
-                    int result= NoteActivity.mNoteDbAdapter.updateNote(editNote);
+                    NoteActivity.mNoteDbAdapter.updateNote(editNote);
                     finish();
                     break;
                 } else {
-                    if (TextUtils.isEmpty(mEtNoteContent.getText().toString())) {
+                    if (TextUtils.isEmpty(mEditNoteContent.getText().toString())) {
                         Toast.makeText(NoteContentActivity.this, R.string.not_empty, Toast.LENGTH_SHORT).show();
                         Snackbar.make(mScrollView,R.string.not_empty,Snackbar.LENGTH_SHORT).show();
                         break;
                     } else {
-                        String content = mEtNoteContent.getText().toString();
-                        long result=NoteActivity.mNoteDbAdapter.createNote(content,isImportant, DateUtil.formatDateTime());
+                        String content = mEditNoteContent.getText().toString();
+                        NoteActivity.mNoteDbAdapter.createNote(content,isImportant, DateUtil.formatDateTime());
                         finish();
                         break;
                     }

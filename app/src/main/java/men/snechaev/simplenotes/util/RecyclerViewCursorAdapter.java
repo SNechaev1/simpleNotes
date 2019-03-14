@@ -27,15 +27,14 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     public abstract void onBindViewHolder(VH holder, Cursor cursor);
 
     public RecyclerViewCursorAdapter(Context context, Cursor c, int flags) {
-        init(context, c, flags);
+        init(c, flags);
     }
 
-    void init(Context context, Cursor c, int flags) {
+    void init(Cursor c, int flags) {
 
         boolean cursorPresent = c != null;
         mCursor = c;
         mDataValid = cursorPresent;
-        Context mContext = context;
         mRowIDColumn = cursorPresent ? c.getColumnIndexOrThrow("_id") : -1;
         if ((flags & FLAG_REGISTER_CONTENT_OBSERVER) == FLAG_REGISTER_CONTENT_OBSERVER) {
             mChangeObserver = new ChangeObserver();
@@ -100,7 +99,7 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     }
 
 
-    public Cursor swapCursor(Cursor newCursor) {
+    private Cursor swapCursor(Cursor newCursor) {
         if (newCursor == mCursor) {
             return null;
         }

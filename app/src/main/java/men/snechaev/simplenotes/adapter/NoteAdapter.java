@@ -1,6 +1,5 @@
 package men.snechaev.simplenotes.adapter;
 
-
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -77,11 +76,7 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
     }
 
     @Override
-    protected void onContentChanged() {
-
-    }
-
-
+    protected void onContentChanged() { }
 
     public void setRecyclerViewOnItemClickListener(RecyclerViewOnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;

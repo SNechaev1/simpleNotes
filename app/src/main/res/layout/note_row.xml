@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:focusable="true">
 
 
         <LinearLayout
@@ -42,7 +42,7 @@
                     android:id="@+id/row_text"
                     android:textSize="18sp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     android:layout_marginBottom="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -52,9 +52,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_note_time"
-                    android:textSize="9sp"
+                    android:textSize="12sp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     android:textColor="?android:attr/textColorLink" />
             </LinearLayout>
 
