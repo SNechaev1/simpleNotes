@@ -20,7 +20,7 @@ public class NoteDbAdapter {
     public static final String COL_ID = "_id";
     public static final String COL_CONTENT = "content";
     public static final String COL_IMPORTANT = "important";
-    public static final String COL_DATETIME = "last_motidied_time";
+    public static final String COL_DATETIME = "last_modified_time";
 
     public static final int INDEX_ID = 0;
     public static final int INDEX_CONTENT = INDEX_ID + 1;
