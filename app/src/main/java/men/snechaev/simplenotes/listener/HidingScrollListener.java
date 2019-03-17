@@ -11,7 +11,7 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
     private static final int HIDE_THRESHOLD = 20;
     private int scrolledDistance = 0;
     private boolean controlsVisible = true;
-    private int mItemSize=0;
+    private int mItemSize;
 
     public HidingScrollListener(int itemSize) {
         this.mItemSize = itemSize - 1;

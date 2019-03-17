@@ -32,7 +32,8 @@
             android:hint="@string/enter_note"
             android:maxLines="26"
             android:scrollbars="vertical"
-            android:background="@null" />
+            android:background="@null"
+            android:importantForAutofill="no" />
 
     </ScrollView>
 

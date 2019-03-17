@@ -5,7 +5,7 @@ import android.database.Cursor;
 
 class CursorFilter extends Filter {
 
-    private CursorFilterClient mClient;
+    private final CursorFilterClient mClient;
 
     interface CursorFilterClient {
         CharSequence convertToString(Cursor cursor);

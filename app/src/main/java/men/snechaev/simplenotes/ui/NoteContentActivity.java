@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
@@ -18,6 +19,7 @@ import java.util.Objects;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import men.snechaev.simplenotes.R;
+import men.snechaev.simplenotes.adapter.NoteDbAdapter;
 import men.snechaev.simplenotes.bean.Note;
 import men.snechaev.simplenotes.util.DateUtil;
 
@@ -28,6 +30,7 @@ public class NoteContentActivity extends AppCompatActivity {
     private ScrollView mScrollView;
     private Note mNote;
     private boolean isImportant = true;
+    public NoteDbAdapter mNoteDbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,11 @@ public class NoteContentActivity extends AppCompatActivity {
             Log.d("NoteContentActivity", mNote.getContent() + isImportant);
         }
         initToolbar(isImportant);
+
+        if (mNoteDbAdapter == null) {
+            mNoteDbAdapter = new NoteDbAdapter(this);
+            mNoteDbAdapter.open();
+        }
     }
 
     @Override
@@ -92,7 +100,8 @@ public class NoteContentActivity extends AppCompatActivity {
                 if (mNote != null) {
                     String content = mEditNoteContent.getText().toString();
                     Note editNote = new Note(mNote.getId(), content, isImportant ? 1 : 0,DateUtil.formatDateTime());
-                    NoteActivity.mNoteDbAdapter.updateNote(editNote);
+
+                    mNoteDbAdapter.updateNote(editNote);
                     finish();
                     break;
                 } else {
@@ -102,7 +111,7 @@ public class NoteContentActivity extends AppCompatActivity {
                         break;
                     } else {
                         String content = mEditNoteContent.getText().toString();
-                        NoteActivity.mNoteDbAdapter.createNote(content,isImportant, DateUtil.formatDateTime());
+                        mNoteDbAdapter.createNote(content,isImportant, DateUtil.formatDateTime());
                         finish();
                         break;
                     }

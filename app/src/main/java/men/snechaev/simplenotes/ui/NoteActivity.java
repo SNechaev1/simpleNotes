@@ -24,8 +24,8 @@ import men.snechaev.simplenotes.util.DateUtil;
 
 public class NoteActivity extends AppCompatActivity {
 
-    public static NoteDbAdapter mNoteDbAdapter;
-    public NoteAdapter mNoteAdapter;
+    public NoteDbAdapter mNoteDbAdapter;
+    private NoteAdapter mNoteAdapter;
     private Cursor mCursor;
     private static final String TAG = "NoteActivity";
 
@@ -112,7 +112,7 @@ public class NoteActivity extends AppCompatActivity {
         mNoteAdapter.setOnSwipeListener(new NoteAdapter.onSwipeListener() {
             @Override
             public void onDel(int pos) {
-                Toast.makeText(NoteActivity.this, "delete " + (pos+1) + " item", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoteActivity.this, "delete "+ " item "  + (pos+1) , Toast.LENGTH_SHORT).show();
                 mCursor.moveToPosition(pos);
                 int id = mCursor.getInt(mCursor.getColumnIndex(NoteDbAdapter.COL_ID));
                 mNoteDbAdapter.deleteNoteById(id);
@@ -122,7 +122,7 @@ public class NoteActivity extends AppCompatActivity {
 
             @Override
             public void onTop(int pos) {
-                Toast.makeText(NoteActivity.this, "put " + (pos+1) + " item on top", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoteActivity.this, "put item " + (pos+1) + " on top", Toast.LENGTH_SHORT).show();
                 mCursor.moveToPosition(pos);
                 int id = mCursor.getInt(mCursor.getColumnIndex(NoteDbAdapter.COL_ID));
                 Note editNote = mNoteDbAdapter.fetchNoteById(id);
@@ -138,6 +138,26 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private void insertSomeReminders() {
+        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());

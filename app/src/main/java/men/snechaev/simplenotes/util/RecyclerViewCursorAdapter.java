@@ -25,9 +25,9 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     private FilterQueryProvider mFilterQueryProvider;
     private static final int FLAG_REGISTER_CONTENT_OBSERVER = 0x02;
 
-    public abstract void onBindViewHolder(VH holder, Cursor cursor);
+    protected abstract void onBindViewHolder(VH holder, Cursor cursor);
 
-    public RecyclerViewCursorAdapter(Context context, Cursor c, int flags) {
+    protected RecyclerViewCursorAdapter(Context context, Cursor c, int flags) {
         init(c, flags);
     }
 

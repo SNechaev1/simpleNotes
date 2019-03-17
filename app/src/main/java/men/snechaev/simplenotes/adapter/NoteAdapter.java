@@ -17,7 +17,7 @@ import men.snechaev.simplenotes.util.RecyclerViewCursorAdapter;
 
 public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private RecyclerViewOnItemClickListener mOnItemClickListener;
     private onSwipeListener mOnSwipeListener;
 
@@ -106,12 +106,12 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
 
 
     class MyNoteViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
-        private TextView tv_dateTime;
-        private View mRowtab;
-        private Button btnTop;
-        private Button btnDelete;
-        private View root;
+        private final TextView tv;
+        private final TextView tv_dateTime;
+        private final View mRowtab;
+        private final Button btnTop;
+        private final Button btnDelete;
+        private final View root;
 
         MyNoteViewHolder(View root) {
             super(root);
