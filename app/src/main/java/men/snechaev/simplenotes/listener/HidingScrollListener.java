@@ -1,5 +1,8 @@
 package men.snechaev.simplenotes.listener;
 
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +19,9 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
 
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        int firstVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+        int firstVisibleItem = ((LinearLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager())).findFirstVisibleItemPosition();
         int lastVisibleItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
 
         if (firstVisibleItem == 0||lastVisibleItem==mItemSize) {
@@ -47,6 +50,6 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
         }
     }
 
-    public abstract void onHide();
-    public abstract void onShow();
+    abstract void onHide();
+    abstract void onShow();
 }

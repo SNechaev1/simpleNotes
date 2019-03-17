@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import men.snechaev.simplenotes.R;
 import men.snechaev.simplenotes.util.RecyclerViewCursorAdapter;
@@ -27,11 +27,11 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
         this.mContext = context;
     }
 
+    @NonNull
     @Override
-    public MyNoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_row, parent, false);
-        MyNoteViewHolder holder = new MyNoteViewHolder(root);
-        return holder;
+        return new MyNoteViewHolder(root);
     }
 
     @Override
@@ -86,8 +86,6 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
         return mOnItemClickListener;
     }
 
-
-
     public onSwipeListener getOnSwipeListener() {
         return mOnSwipeListener;
     }
@@ -97,15 +95,12 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
         this.mOnSwipeListener = mOnSwipeListener;
     }
 
-
     public interface RecyclerViewOnItemClickListener {
         void onItemClickListener(View view, int position);
     }
 
-
     public interface onSwipeListener {
         void onDel(int pos);
-
         void onTop(int pos);
     }
 
@@ -118,7 +113,7 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
         private Button btnDelete;
         private View root;
 
-        public MyNoteViewHolder(View root) {
+        MyNoteViewHolder(View root) {
             super(root);
             this.root = root;
             tv = root.findViewById(R.id.row_text);

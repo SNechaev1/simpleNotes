@@ -2,8 +2,10 @@ package men.snechaev.simplenotes.ui;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -19,7 +21,6 @@ import men.snechaev.simplenotes.adapter.NoteAdapter;
 import men.snechaev.simplenotes.adapter.NoteDbAdapter;
 import men.snechaev.simplenotes.bean.Note;
 import men.snechaev.simplenotes.util.DateUtil;
-import men.snechaev.simplenotes.util.SharedPreferencesUtil;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -46,13 +47,13 @@ public class NoteActivity extends AppCompatActivity {
             mNoteDbAdapter.open();
         }
 
-
-        SharedPreferencesUtil shared=new SharedPreferencesUtil(NoteActivity.this,NoteDbAdapter.CONFIG);
-        boolean isFirstStart = shared.getBoolean(NoteDbAdapter.IS_FIRST_START);
-        if(!isFirstStart){
-            mNoteDbAdapter.deleteAllNotes();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirstRun = preferences.getBoolean("isFirstRun", true);
+        if(isFirstRun){
             insertSomeReminders();
-            shared.putBoolean(NoteDbAdapter.IS_FIRST_START,true);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isFirstRun", false);
+            editor.apply();
         }
     }
 
@@ -137,17 +138,10 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private void insertSomeReminders() {
-        mNoteDbAdapter.createNote("Learn Android Studio", true,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("String squash racket", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Prepare Advanced Android syllabus", false,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Call Auto-body shop", false,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new Galaxy Android phone", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Sell old Android phone - auction", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new paddles for kayaks", true,DateUtil.formatDateTime());
+        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy 300,000 shares of Google", false,DateUtil.formatDateTime());
     }
 }

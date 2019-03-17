@@ -7,25 +7,20 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import men.snechaev.simplenotes.bean.Note;
 
+
 public class NoteDbAdapter {
-
-
-    public static final String CONFIG = "config";
-    public static final String IS_FIRST_START="is_first_start";
-
 
     public static final String COL_ID = "_id";
     public static final String COL_CONTENT = "content";
     public static final String COL_IMPORTANT = "important";
-    public static final String COL_DATETIME = "last_modified_time";
+    static final String COL_DATETIME = "last_modified_time";
 
-    public static final int INDEX_ID = 0;
-    public static final int INDEX_CONTENT = INDEX_ID + 1;
-    public static final int INDEX_IMPORTANT = INDEX_ID + 2;
-    public static final int INDEX_DATETIME = INDEX_ID + 3;
+    private static final int INDEX_ID = 0;
+    private static final int INDEX_CONTENT = INDEX_ID + 1;
+    private static final int INDEX_IMPORTANT = INDEX_ID + 2;
+    private static final int INDEX_DATETIME = INDEX_ID + 3;
 
     private static final String DATABASE_NAME = "dba_note";
     private static final String TABLE_NAME = "tb1_note";
@@ -56,42 +51,33 @@ public class NoteDbAdapter {
         mDb = mDataBaseHelper.getWritableDatabase();
     }
 
-
     public void close(){
         if (mDataBaseHelper != null) {
             mDataBaseHelper.close();
         }
     }
 
-
-    public long createNote(String name, boolean important,String dateTime) {
+    public void createNote(String name, boolean important, String dateTime) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_CONTENT, name);
         contentValues.put(COL_IMPORTANT, important ? 1 : 0);
         contentValues.put(COL_DATETIME,dateTime);
-        return mDb.insert(TABLE_NAME, null, contentValues);
+        mDb.insert(TABLE_NAME, null, contentValues);
     }
-
-    public long createNote(Note note) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_CONTENT, note.getContent());
-        contentValues.put(COL_IMPORTANT, note.getImportant());
-        contentValues.put(COL_DATETIME,note.getDateTime());
-        return mDb.insert(TABLE_NAME, null, contentValues);
-    }
-
 
     public Note fetchNoteById(int id) {
-        Cursor cursor=mDb.query(TABLE_NAME,new String[]{COL_ID,COL_CONTENT,COL_IMPORTANT,COL_DATETIME},
-                COL_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
-        if (cursor != null) {
-            cursor.moveToFirst();
+        try (Cursor cursor = mDb.query(TABLE_NAME, new String[]{COL_ID, COL_CONTENT, COL_IMPORTANT, COL_DATETIME},
+                COL_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null)) {
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            assert cursor != null;
+            return new Note(
+                    cursor.getInt(INDEX_ID),
+                    cursor.getString(INDEX_CONTENT),
+                    cursor.getInt(INDEX_IMPORTANT),
+                    cursor.getString(INDEX_DATETIME));
         }
-        return new Note(
-                cursor.getInt(INDEX_ID),
-                cursor.getString(INDEX_CONTENT),
-                cursor.getInt(INDEX_IMPORTANT),
-                cursor.getString(INDEX_DATETIME));
     }
 
 
@@ -105,12 +91,12 @@ public class NoteDbAdapter {
     }
 
 
-    public int updateNote(Note note) {
+    public void updateNote(Note note) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_CONTENT, note.getContent());
         contentValues.put(COL_IMPORTANT, note.getImportant());
         contentValues.put(COL_DATETIME,note.getDateTime());
-        return mDb.update(TABLE_NAME, contentValues,
+        mDb.update(TABLE_NAME, contentValues,
                 COL_ID + "=?", new String[]{String.valueOf(note.getId())});
     }
 
@@ -126,7 +112,7 @@ public class NoteDbAdapter {
 
     private static class DataBaseHelper extends SQLiteOpenHelper {
 
-        public DataBaseHelper(Context context) {
+        DataBaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 

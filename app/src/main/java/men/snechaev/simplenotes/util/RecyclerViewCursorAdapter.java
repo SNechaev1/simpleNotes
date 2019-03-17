@@ -9,11 +9,12 @@ import android.widget.Filter;
 import android.widget.FilterQueryProvider;
 import android.widget.Filterable;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>  implements Filterable,
-        CursorFilter.CursorFilterClient {
+public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
+        implements Filterable, CursorFilter.CursorFilterClient {
 
     private boolean mDataValid;
     private Cursor mCursor;
@@ -30,7 +31,7 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
         init(c, flags);
     }
 
-    void init(Cursor c, int flags) {
+    private void init(Cursor c, int flags) {
 
         boolean cursorPresent = c != null;
         mCursor = c;
@@ -80,7 +81,7 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(VH holder, int position) {
+    public void onBindViewHolder(@NonNull VH holder, int position) {
         if (!mDataValid) {
             throw new IllegalStateException("this should only be called when the cursor is valid");
         }
@@ -121,7 +122,6 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
             mDataValid = false;
 
             notifyDataSetChanged();
-
         }
         return oldCursor;
     }
@@ -161,7 +161,7 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     protected abstract void onContentChanged();
 
     private class ChangeObserver extends ContentObserver {
-        public ChangeObserver() {
+        ChangeObserver() {
             super(new Handler());
         }
 

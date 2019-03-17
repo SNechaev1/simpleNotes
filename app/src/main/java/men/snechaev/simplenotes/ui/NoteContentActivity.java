@@ -11,8 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,12 +35,10 @@ public class NoteContentActivity extends AppCompatActivity {
         setContentView(R.layout.note_content);
 
         mEditNoteContent = findViewById(R.id.et_note_content);
-
         mScrollView = findViewById(R.id.scrollview_note_content);
         Intent intent = this.getIntent();
 
         if ((mNote = (Note) intent.getSerializableExtra("note")) != null) {
-//            mNoteID = mNote.getId();
             mEditNoteContent.setText(mNote.getContent());
             mEditNoteContent.setSelection(mEditNoteContent.getText().length());
             isImportant = mNote.getImportant() == 1;
@@ -59,7 +58,7 @@ public class NoteContentActivity extends AppCompatActivity {
     private void initToolbar(boolean isImportant) {
         Toolbar toolbar = findViewById(R.id.toolbar_note_content);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +71,6 @@ public class NoteContentActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_star).setChecked(isImportant);
         setItemIcon(menu.findItem(R.id.action_star), isImportant);
-
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -109,8 +107,6 @@ public class NoteContentActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
-
         }
         return  super.onOptionsItemSelected(item);
     }
@@ -120,6 +116,5 @@ public class NoteContentActivity extends AppCompatActivity {
         item.setIcon(isImportant ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off);
         this.isImportant = isImportant;
     }
-
 
 }
