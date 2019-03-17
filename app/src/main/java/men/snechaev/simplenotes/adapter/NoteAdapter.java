@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import men.snechaev.simplenotes.R;
@@ -75,20 +74,20 @@ public class NoteAdapter extends RecyclerViewCursorAdapter<NoteAdapter.MyNoteVie
 
     }
 
-    @Override
-    protected void onContentChanged() { }
+//    @Override
+//    protected void onContentChanged() { }
 
     public void setRecyclerViewOnItemClickListener(RecyclerViewOnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    public RecyclerViewOnItemClickListener getOnItemClickListener() {
-        return mOnItemClickListener;
-    }
-
-    public onSwipeListener getOnSwipeListener() {
-        return mOnSwipeListener;
-    }
+//    public RecyclerViewOnItemClickListener getOnItemClickListener() {
+//        return mOnItemClickListener;
+//    }
+//
+//    public onSwipeListener getOnSwipeListener() {
+//        return mOnSwipeListener;
+//    }
 
 
     public void setOnSwipeListener(onSwipeListener mOnSwipeListener) {

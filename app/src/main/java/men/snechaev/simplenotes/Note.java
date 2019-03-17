@@ -1,4 +1,4 @@
-package men.snechaev.simplenotes.bean;
+package men.snechaev.simplenotes;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ public class Note implements Serializable {
     private int mImportant;
     private String mDateTime;
 
-    public Note(int id, String content, int important,String dateTime) {
+    public Note(int id, String content, int important, String dateTime) {
         mId = id;
         mContent = content;
         mImportant = important;
@@ -26,24 +26,12 @@ public class Note implements Serializable {
         return mId;
     }
 
-    public void setId(int id) {
-        mId = id;
-    }
-
     public String getContent() {
         return mContent;
     }
 
-    public void setContent(String content) {
-        mContent = content;
-    }
-
     public int getImportant() {
         return mImportant;
-    }
-
-    public void setImportant(int important) {
-        mImportant = important;
     }
 
     public String getDateTime() {

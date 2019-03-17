@@ -19,12 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import men.snechaev.simplenotes.R;
 import men.snechaev.simplenotes.adapter.NoteAdapter;
 import men.snechaev.simplenotes.adapter.NoteDbAdapter;
-import men.snechaev.simplenotes.bean.Note;
+import men.snechaev.simplenotes.Note;
 import men.snechaev.simplenotes.util.DateUtil;
 
 public class NoteActivity extends AppCompatActivity {
 
-    public NoteDbAdapter mNoteDbAdapter;
+    private NoteDbAdapter mNoteDbAdapter;
     private NoteAdapter mNoteAdapter;
     private Cursor mCursor;
     private static final String TAG = "NoteActivity";
@@ -143,25 +143,11 @@ public class NoteActivity extends AppCompatActivity {
         mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
         mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Send Dad birthday gift", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new office chair", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Renew membership to club", false,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Buy new Android phone", true,DateUtil.formatDateTime());
-        mNoteDbAdapter.createNote("Call accountant about tax returns", false,DateUtil.formatDateTime());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mNoteDbAdapter.close();
     }
 }

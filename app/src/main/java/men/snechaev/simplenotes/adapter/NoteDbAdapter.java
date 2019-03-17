@@ -7,7 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import men.snechaev.simplenotes.bean.Note;
+import men.snechaev.simplenotes.Note;
 
 
 public class NoteDbAdapter {
@@ -118,13 +118,13 @@ public class NoteDbAdapter {
 
         @Override
         public void onCreate(SQLiteDatabase database) {
-            Log.w(TAG, DATABASE_CREATE);
+//            Log.w(TAG, DATABASE_CREATE);
             database.execSQL(DATABASE_CREATE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-            Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+//            Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
             database.execSQL(UPGRADING_DATABASE);
             onCreate(database);
         }

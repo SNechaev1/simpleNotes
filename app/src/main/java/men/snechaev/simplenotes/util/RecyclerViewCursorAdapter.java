@@ -148,17 +148,17 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
     }
 
 
-    public FilterQueryProvider getFilterQueryProvider() {
-        return mFilterQueryProvider;
-    }
-
-
-    public void setFilterQueryProvider(FilterQueryProvider filterQueryProvider) {
-        mFilterQueryProvider = filterQueryProvider;
-    }
-
-
-    protected abstract void onContentChanged();
+//    public FilterQueryProvider getFilterQueryProvider() {
+//        return mFilterQueryProvider;
+//    }
+//
+//
+//    public void setFilterQueryProvider(FilterQueryProvider filterQueryProvider) {
+//        mFilterQueryProvider = filterQueryProvider;
+//    }
+//
+//
+//    protected abstract void onContentChanged();
 
     private class ChangeObserver extends ContentObserver {
         ChangeObserver() {
@@ -170,10 +170,10 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
             return true;
         }
 
-        @Override
-        public void onChange(boolean selfChange) {
-            onContentChanged();
-        }
+//        @Override
+//        public void onChange(boolean selfChange) {
+//            onContentChanged();
+//        }
     }
 
     private class MyDataSetObserver extends DataSetObserver {

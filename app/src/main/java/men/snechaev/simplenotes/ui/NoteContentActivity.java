@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import men.snechaev.simplenotes.R;
 import men.snechaev.simplenotes.adapter.NoteDbAdapter;
-import men.snechaev.simplenotes.bean.Note;
+import men.snechaev.simplenotes.Note;
 import men.snechaev.simplenotes.util.DateUtil;
 
 
@@ -30,7 +30,7 @@ public class NoteContentActivity extends AppCompatActivity {
     private ScrollView mScrollView;
     private Note mNote;
     private boolean isImportant = true;
-    public NoteDbAdapter mNoteDbAdapter;
+    private NoteDbAdapter mNoteDbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +124,12 @@ public class NoteContentActivity extends AppCompatActivity {
     private void setItemIcon(MenuItem item, boolean isImportant) {
         item.setIcon(isImportant ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off);
         this.isImportant = isImportant;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mNoteDbAdapter.close();
     }
 
 }
