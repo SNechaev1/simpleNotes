@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Простые заметки</string>
+    <string name="note_text">заметка</string>
+    <string name="action_save">сохранить</string>
+    <string name="action_star">звезда</string>
+    <string name="not_empty">не пусто</string>
+    <string name="delete">удалить</string>
+    <string name="top">вверх</string>
+    <string name="not_important">не важно</string>
+    <string name="important">важно</string>
+    <string name="enter_note">введите заметку</string>
+</resources>

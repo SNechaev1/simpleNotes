@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">simpleNotes</string>
+    <string name="app_name">simple Notes</string>
     <string name="note_text">Note</string>
     <string name="action_save">Save</string>
-    <string name="action_star">Star</string>
+    <string name="action_star">star</string>
     <string name="not_empty">not Empty</string>
     <string name="delete">delete</string>
     <string name="top">top</string>
